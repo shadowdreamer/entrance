@@ -1,9 +1,12 @@
 <template lang="pug">
 Smoke
+Audio
+Shouts
 </template>
 <script setup>
 import Smoke from "@/components/Smoke.vue";
-import { sound } from '@/utils/audio.js'
+import Audio from "@/components/Audio.vue";
+import Shouts from "@/components/Shouts.vue";
 </script>
 <style scoped>
 .title {
