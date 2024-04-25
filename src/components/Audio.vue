@@ -28,28 +28,39 @@ sound.on('pause', () => {
 sound.play();
 
 function toggleSound () {
-  if(sound.playing()){
+  if (sound.playing()) {
     sound.pause()
-  }else{
+  } else {
     sound.play()
   }
 }
- 
+
 </script>
 <style scoped lang="scss">
 .mute-btn {
   @apply font-dovahkiin fixed top-6 right-6 text-3xl cursor-pointer;
-  &.muted{
+
+  &.muted {
     @apply line-through
   }
-  &.playing{
-    animation: beat 1s infinite;
+
+  &.playing {
+    animation: beat 1.2s infinite;
     transform-origin: center;
   }
 }
-@keyframes beat{
-  0%  {transform: scale(1); }
- 	90% { transform: scale(1.05); }
-	100% { transform: scale(1); }
+
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+
+  90% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

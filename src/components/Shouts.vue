@@ -1,26 +1,31 @@
 <template lang="pug">
-.shout-btn(@click="play()" ) 
+.shout-btn(@click="play()" :class="{hide:hide}") 
   .text FUS Ro Dah
   .shadow FUS Ro Dah
 </template>
-<script setup lang="jsx">
+<script setup>
 import { Howl, Howler } from 'howler';
 import sound1 from '@/assets/fusrodah.webm'
 import sound2 from '@/assets/fusrodah.mp3'
-import { reactive } from "vue";
-import { defineComponent } from 'vue'
-
+import { onMounted,ref } from 'vue'
 const sound = new Howl({
   src: [sound1, sound2],
   autoplay: false,
   volume: 1,
 });
-
+const hide = ref(true)
+onMounted(()=>{
+  fontLoaded();
+})
+function fontLoaded(){
+  document.fonts.ready.then(()=>{
+    hide.value = false;
+  })
+}
 function play () {
   sound.play();
   let dom = document.querySelector('.shadow');
-  console.log(dom);
-  let ani = dom.animate([
+  dom.animate([
     { transform: "scale(1)",opacity:0 },
     { transform: "scale(2)" ,opacity:0.3},
     { transform: "scale(3)" ,opacity:0.6},
@@ -42,9 +47,12 @@ function play () {
 .shout-btn {
   @apply fixed top-1/2 left-[calc(50%-10vw)] text-[3vw] font-dovahkiin cursor-pointer transition-all opacity-50 select-none;
   transform-origin: right;
+  &.hide{
+    opacity: 0;
+  }
 
   &:hover {
-    @apply scale-[1.08] opacity-100;
+    @apply opacity-100;
   }
 
   .text {
